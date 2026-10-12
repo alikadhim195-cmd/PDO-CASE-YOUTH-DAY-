@@ -1,0 +1,9 @@
+{
+  "name": "pdo-case-desk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.4"
+  }
+}

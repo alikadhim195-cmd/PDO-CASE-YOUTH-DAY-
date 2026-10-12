@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hawrah North Case Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --ink: #0a1211; --panel: #14211f; --panel-2: #1b2c29; --line: #2b403b; --line-soft: #1f302d;
+  --fg: #f1efe9; --muted: #92a8a3; --amber: #f0b86c; --red: #e0765c; --green: #7cc4a1;
+  --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--ink); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+h1 { margin: 0; text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 16px; }
+.lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+#gate { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 44px 16px; }
+.gate-card { width: 100%; max-width: 440px; }
+.gate-card h1 { font-size: 27px; font-weight: 600; letter-spacing: -0.4px; margin-bottom: 6px; }
+.gate-sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+.rooms { display: flex; gap: 8px; margin: 8px 0 22px; }
+.room-btn { flex: 1; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 10px; font-family: var(--mono); font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase; }
+.room-btn.on { border-color: var(--amber); color: var(--amber); }
+.gate-btn { display: block; width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 17px 16px; text-align: left; margin-bottom: 10px; }
+.gate-btn:hover { border-color: var(--amber); background: var(--panel-2); }
+.gate-btn .n { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase; display: block; }
+.gate-btn .t { font-size: 12.5px; color: var(--muted); }
+.gate-btn.desk { border-color: var(--amber); }
+.gate-btn.desk .n { color: var(--amber); }
+
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(10,18,17,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.rail-in { display: flex; align-items: center; gap: 12px; padding: 9px 16px; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
+.rail .who { font-family: var(--mono); font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--amber); white-space: nowrap; }
+.clock { font-family: var(--mono); font-size: 21px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.clock.stopped { color: var(--muted); }
+.credits { margin-left: auto; display: flex; align-items: baseline; gap: 6px; }
+.credits .v { font-family: var(--mono); font-size: 21px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.credits .v.low { color: var(--red); }
+.pips { display: flex; gap: 3px; margin-left: 2px; }
+.pip { width: 7px; height: 14px; background: var(--amber); border-radius: 1px; }
+.pip.spent { background: var(--line); }
+.linkish { background: none; border: 0; color: var(--muted); font-size: 12px; text-decoration: underline; padding: 4px; }
+.status { font-family: var(--mono); font-size: 10px; letter-spacing: 1.1px; text-transform: uppercase; border: 1px solid var(--line); border-radius: 11px; padding: 3px 9px; color: var(--muted); white-space: nowrap; }
+.status.live { color: var(--green); border-color: var(--green); }
+.status.off { color: var(--red); border-color: var(--red); }
+
+.phase { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 3px; padding: 10px 13px; }
+.phase.closing { border-color: var(--red); }
+.phase .pn { font-family: var(--mono); font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--amber); }
+.phase .pr { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.phase .pr.urgent { color: var(--red); }
+.phase .pd { font-size: 13px; color: var(--muted); flex-basis: 100%; }
+
+.sec { margin: 20px 0; }
+.sec > .lbl { display: block; margin-bottom: 9px; }
+.card { background: var(--panel); border: 1px solid var(--line-soft); border-radius: 3px; padding: 14px 16px; }
+.card-b { font-size: 14px; line-height: 1.55; color: #ddd9d1; white-space: pre-wrap; }
+.stamp { font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.stamp.amber { color: var(--amber); } .stamp.green { color: var(--green); }
+.stamp.red { color: var(--red); } .stamp.muted { color: var(--muted); }
+
+.feed-item { border-left: 3px solid var(--line); padding-left: 13px; margin-bottom: 16px; }
+.feed-item.inject { border-left-color: var(--red); }
+.feed-item.release { border-left-color: var(--green); }
+.feed-item.answer { border-left-color: var(--amber); }
+.feed-head { display: flex; gap: 9px; align-items: baseline; flex-wrap: wrap; margin-bottom: 4px; }
+.feed-head .t { font-weight: 600; font-size: 14.5px; }
+.feed-body { font-size: 14px; line-height: 1.55; color: #ddd9d1; white-space: pre-wrap; }
+.collect { margin-top: 7px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .6px; color: var(--green); text-transform: uppercase; }
+.collect.ask { color: var(--amber); }
+
+.buy { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--line-soft); border-radius: 3px; padding: 11px 13px; margin-bottom: 7px; }
+.buy:hover:not(:disabled) { border-color: var(--amber); background: var(--panel-2); }
+.buy:disabled { opacity: .42; cursor: default; }
+.buy .nm { flex: 1; min-width: 0; font-size: 14px; }
+.buy .nm small { display: block; color: var(--muted); font-size: 11.5px; }
+.buy .cost { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--amber); white-space: nowrap; }
+.buy.bought .cost { color: var(--green); }
+
+textarea { width: 100%; background: var(--ink); color: var(--fg); border: 1px solid var(--line); border-radius: 3px; padding: 10px 11px; font-family: var(--sans); font-size: 14px; resize: vertical; }
+.btn { background: var(--amber); color: #11201d; border: 0; border-radius: 3px; padding: 10px 16px; font-weight: 600; font-size: 14px; }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn.ghost { background: none; border: 1px solid var(--line); color: var(--fg); font-weight: 500; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 9px; }
+.notice { border: 1px dashed var(--line); border-radius: 3px; padding: 13px 15px; color: var(--muted); font-size: 13.5px; }
+.notice strong { color: var(--fg); }
+.err { border: 1px solid var(--red); border-radius: 3px; padding: 10px 13px; color: var(--red); font-size: 13px; margin-bottom: 12px; }
+.alert { border: 1px solid var(--amber); background: var(--panel-2); border-radius: 3px; padding: 13px 15px; margin-bottom: 12px; }
+.alert .at { font-family: var(--mono); font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--amber); }
+.alert .ab { font-size: 15px; font-weight: 600; margin-top: 4px; }
+
+.stat { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 9px; }
+.stat .s { background: var(--panel); border: 1px solid var(--line-soft); border-radius: 3px; padding: 12px 13px; }
+.stat .s.flag { border-color: var(--red); }
+.stat .sk { font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.1px; text-transform: uppercase; color: var(--muted); }
+.stat .sv { font-family: var(--mono); font-size: 21px; font-weight: 600; margin-top: 2px; }
+.stat .sn { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.q { background: var(--panel); border: 1px solid var(--line-soft); border-left: 3px solid var(--amber); border-radius: 3px; padding: 12px 14px; margin-bottom: 9px; }
+.q.done { border-left-color: var(--line); opacity: .62; }
+.q .qt { font-size: 14.5px; margin: 5px 0 8px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.chip { background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 4px 10px; font-size: 11.5px; color: var(--muted); }
+.chip:hover { border-color: var(--amber); color: var(--fg); }
+.inj { display: flex; gap: 11px; align-items: center; background: var(--panel); border: 1px solid var(--line-soft); border-radius: 3px; padding: 11px 13px; margin-bottom: 7px; }
+.inj.manual { border-style: dashed; }
+.inj .ii { flex: 1; min-width: 0; }
+.inj .ii .t { font-weight: 600; font-size: 14px; }
+.inj .ii .n { font-size: 12px; color: var(--muted); margin-top: 2px; }
+table.audit { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.audit th { text-align: left; padding: 6px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.scroll-x { overflow-x: auto; }
+
+#blackout { position: fixed; inset: 0; z-index: 60; background: var(--ink); display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+#blackout .bt { font-family: var(--mono); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); }
+#blackout .bs { font-size: 25px; font-weight: 600; margin-top: 12px; max-width: 420px; }
+
+@media (max-width: 560px) {
+  .rail-in { gap: 9px; padding: 8px 14px; }
+  .clock { font-size: 18px; } .credits .v { font-size: 18px; } .pips { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="lbl">Oman Youth Day 2026 · Case 1</div>
+    <h1>Hawrah North Case Desk</h1>
+    <p class="gate-sub">Grievance ER-2026-0338. Twenty minutes.</p>
+    <div class="lbl">Room</div>
+    <div class="rooms" id="g-rooms"></div>
+    <button class="gate-btn" data-role="panel"><span class="n">The panel</span><span class="t">Your table — one screen is enough</span></button>
+    <button class="gate-btn desk" data-role="desk"><span class="n">Case desk</span><span class="t">Committee member running the room</span></button>
+  </div>
+</div>
+
+<div id="panel" hidden>
+  <div class="rail"><div class="rail-in">
+    <span class="who" id="p-who">Review panel</span>
+    <span class="clock stopped" id="p-clock">--:--</span>
+    <span class="status" id="p-status">connecting</span>
+    <span class="credits"><span class="lbl">credits</span><span class="v" id="p-credits">8</span><span class="pips" id="p-pips"></span></span>
+  </div></div>
+  <div class="wrap">
+    <div class="sec">
+      <div id="p-phase"></div>
+      <div class="notice" id="p-brief" style="margin-top:10px"></div>
+      <button class="linkish" id="p-leave">Change role or room</button>
+    </div>
+    <div class="sec" id="p-theory-sec" hidden>
+      <span class="lbl" id="p-theory-lbl">Your answer</span>
+      <div class="card">
+        <div class="card-b" id="p-theory-prompt"></div>
+        <div style="margin-top:10px"><textarea id="p-theory" rows="3" placeholder="The real problem is… Our first move is…"></textarea></div>
+        <div class="row"><button class="btn" id="p-theory-send">Submit and lock</button><span class="stamp muted" id="p-theory-note"></span></div>
+      </div>
+    </div>
+    <div class="sec"><span class="lbl">Case feed</span><div id="p-feed"></div></div>
+    <div class="sec"><span class="lbl">Put a question to the Director — 3 credits</span><div id="p-dirs"></div></div>
+    <div class="sec"><span class="lbl">Request a document — 2 credits</span><div id="p-docs"></div></div>
+    <div class="sec"><span class="lbl">Interview — 4 credits</span><div id="p-ints"></div></div>
+    <div class="sec">
+      <span class="lbl">Ask the desk — 1 credit</span>
+      <div id="p-asks"></div>
+      <div class="card" style="margin-top:9px">
+        <div class="card-b">Anything else — the desk answers in a minute or so.</div>
+        <div style="margin-top:9px"><textarea id="p-q" rows="2" placeholder="Type your question for the case desk…"></textarea></div>
+        <div class="row"><button class="btn" id="p-q-send">Send — 1 credit</button><span class="stamp muted">A question that names no document and no person comes back unanswered and costs nothing.</span></div>
+      </div>
+    </div>
+    <div style="height:40px"></div>
+  </div>
+</div>
+
+<div id="desk" hidden>
+  <div class="rail"><div class="rail-in">
+    <span class="who" id="d-who">Case desk</span>
+    <span class="clock stopped" id="d-clock">--:--</span>
+    <span class="status" id="d-status">connecting</span>
+    <button class="btn" id="d-start">Open session</button>
+    <button class="btn ghost" id="d-reveal" hidden>Screens down</button>
+    <button class="linkish" id="d-reset" style="margin-left:auto">Reset</button>
+    <button class="linkish" id="d-leave">Change role or room</button>
+  </div></div>
+  <div class="wrap">
+    <div class="sec"><div id="d-err"></div><div id="d-alert"></div><div id="d-phase"></div></div>
+    <div class="sec"><span class="lbl">The panel</span><div class="stat" id="d-stat"></div></div>
+    <div class="sec"><span class="lbl">Incoming questions</span><div id="d-queue"></div></div>
+    <div class="sec"><span class="lbl">Story events</span><div id="d-injects"></div></div>
+    <div class="sec">
+      <span class="lbl">Audit trail — hand this to the Director before he closes</span>
+      <div class="scroll-x"><table class="audit"><thead><tr><th>Min</th><th>Action</th><th>Detail</th><th>Cost</th></tr></thead><tbody id="d-audit"></tbody></table></div>
+    </div>
+    <div style="height:40px"></div>
+  </div>
+</div>
+
+<div id="blackout" hidden>
+  <div>
+    <div class="bt">Case desk closed</div>
+    <div class="bs">Screens down. The Director has the room.</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var START_CREDITS = 8, T_LOCK = 7, T_REVISE = 11, T_INVEST = 12, T_TOTAL = 20;
+  var ROOMS = ["a", "b", "c"];
+  var API = "/api/state", FALLBACK = "/.netlify/functions/state", apiBase = API;
+
+  var CATALOGUE = {
+    dirA: { kind: "director", cost: 3, name: "Put a question to the Director", hint: "He answers out loud. One question." },
+    dirB: { kind: "director", cost: 3, name: "Put a second question to the Director", hint: "Ask it only if the first one earned its keep." },
+    docA: { kind: "doc", cost: 2, name: "Kick-off minutes", hint: "Hawrah North study, 3 February", card: "Card A" },
+    docB: { kind: "doc", cost: 2, name: "Email thread", hint: "Al Hinai to Al Rashdi, 11–12 May", card: "Card B" },
+    docC: { kind: "doc", cost: 2, name: "Steering committee slide", hint: "Submission of 14 May", card: "Card C" },
+    docD: { kind: "doc", cost: 2, name: "WhatsApp exchange", hint: "Project group, May", card: "Card D" },
+    docE: { kind: "doc", cost: 2, name: "Year-end calibration record", hint: "Engineering, 2026 cycle", card: "Card E" },
+    intK: { kind: "interview", cost: 4, name: "Interview Khalid Al Rashdi", hint: "Senior Process Engineer",
+      answer: "I presented it because the committee submission was my item in the plan. Maryam did the modelling and I said so in the room. The figure went into my objective because that is the only place it goes. I do not know what else I was meant to do." },
+    intN: { kind: "interview", cost: 4, name: "Interview Nasser Al Balushi", hint: "Team Lead",
+      answer: "The close-out was done properly and signed. The study was a team effort and Khalid carried it to the committee. If there is a complaint about recognition I would rather hear it from the person than from a form." },
+    intM: { kind: "interview", cost: 4, name: "Interview Maryam Al Hinai", hint: "Process Engineer",
+      answer: "I am not accusing anybody and I do not want anyone disciplined. I want to understand how it is decided whose name the result goes to, because I was told to raise my profile and nobody can tell me what that means." },
+    askForm: { kind: "ask", cost: 1, name: "How does the performance form handle more than one contributor?",
+      answer: "The objective field accepts one accountable owner. There is no contributor field on the form. Contributors are recorded in the project close-out record, section 4." },
+    askPattern: { kind: "ask", cost: 1, name: "Has anyone else raised something like this?",
+      answer: "Two in the last eighteen months. Both Category 2, both different assets, neither named a person. Both were closed with no action taken." },
+    askCloseout: { kind: "ask", cost: 1, name: "Was the close-out form completed in full?",
+      answer: "Sections 1 to 3 complete and signed. Section 4, the contribution record, was left blank. The form does not require it." }
+  };
+
+  var INJECTS = [
+    { id: "i2", min: 5, title: "Recognition system — nomination submitted",
+      body: "Shukran nomination · Category: Project Delivery\nNominee: Al Hinai, Maryam\nSubmitted by: Al Rashdi, Khalid\nSubmitted 27 September 2026, 16:42\nStatus: pending team lead approval",
+      note: "Three days after the grievance was raised. They will call it a cover-up. It probably is not — the Director protects him at the close." },
+    { id: "i3", min: 9, title: "Employee Relations — second matter logged",
+      body: "ER-2026-0351 raised today. Category 2 — Fairness and recognition. Different asset, different team, no parties named. The wording is close enough to ER-2026-0338 that Employee Relations have flagged the two as related.",
+      note: "The reframe. The individual theory dies here. Say nothing — let them notice." },
+    { id: "i1", manual: true, title: "Email — N. Al Balushi to Director, Engineering",
+      body: "Sir, I understand you are reviewing ER-2026-0338. For completeness: the Hawrah North close-out was carried out in line with ENG-CO-02 and signed on 28 May. The study was a team effort throughout and Khalid led it to the committee. I am available if anything further is needed.",
+      note: "Spare. Push only if they go quiet or settle too early — it hands them a second suspect and buys four minutes." }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var role = null, room = "a", online = false, lastErr = "", busy = false;
+  var state = emptyState();
+
+  function emptyState() {
+    return { startedAt: 0, forced: {}, blackout: false, purchases: {}, requests: {}, theory: "", theoryMin: null, theory2: "", theory2Min: null };
+  }
+  function ls(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {}
+    return null;
+  }
+
+  var qp = new URLSearchParams(location.search);
+  room = (qp.get("room") || ls("cd-room") || "a").toLowerCase();
+  if (ROOMS.indexOf(room) < 0) room = "a";
+  role = ls("cd-role");
+
+  // ---------- transport ----------
+  function url() { return apiBase + "?room=" + encodeURIComponent(room); }
+  function pull() {
+    return fetch(url(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (s) { state = s; online = true; lastErr = ""; render(); })
+      .catch(function (e) {
+        if (apiBase === API) { apiBase = FALLBACK; return pull(); }
+        online = false; lastErr = e.message; render();
+      });
+  }
+  function push(patch) {
+    if (busy) return Promise.resolve();
+    busy = true;
+    return fetch(url(), { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(patch) })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (s) { if (!s.error) { state = s; online = true; lastErr = ""; } else { lastErr = s.error; } render(); })
+      .catch(function (e) {
+        if (apiBase === API) { apiBase = FALLBACK; busy = false; return push(patch); }
+        online = false; lastErr = e.message; render();
+      })
+      .then(function () { busy = false; });
+  }
+
+  // ---------- clock ----------
+  function elapsedMs() { return state.startedAt ? Date.now() - state.startedAt : 0; }
+  function elapsedMin() { return Math.floor(elapsedMs() / 60000); }
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function clockText() {
+    if (!state.startedAt) return "--:--";
+    var s = Math.max(0, Math.floor(elapsedMs() / 1000));
+    return pad(Math.floor(s / 60)) + ":" + pad(s % 60);
+  }
+  function remainingTo(min) {
+    var s = Math.max(0, min * 60 - Math.floor(elapsedMs() / 1000));
+    return pad(Math.floor(s / 60)) + ":" + pad(s % 60);
+  }
+  function investigating() { return !!state.startedAt && elapsedMin() < T_INVEST; }
+  function injectFired(i) {
+    if (state.forced && state.forced[i.id]) return true;
+    if (i.manual) return false;
+    return !!state.startedAt && elapsedMin() >= i.min;
+  }
+  function injectMin(i) { return (state.forced && state.forced[i.id]) || i.min; }
+  function phase() {
+    if (!state.startedAt) return { n: "Not started", d: "The desk opens the session when the Director has set the scene." };
+    var m = elapsedMin();
+    if (m < T_INVEST) return { n: "Investigation", d: "Spend credits, read what comes in, work out what is really going on.", r: remainingTo(T_INVEST), to: T_INVEST };
+    if (m < T_INVEST + 3) return { n: "Tell the Director", d: "Three minutes. He writes it down and does not argue.", r: remainingTo(T_INVEST + 3), to: T_INVEST + 3 };
+    return { n: "The Director closes", d: "What it actually was, what he did, and what he would change.", r: remainingTo(T_TOTAL), to: T_TOTAL };
+  }
+
+  // ---------- derived ----------
+  function purchases() { return state.purchases || {}; }
+  function reqList() {
+    var o = state.requests || {}, a = [];
+    Object.keys(o).forEach(function (k) { var r = Object.assign({}, o[k]); r._id = k; a.push(r); });
+    a.sort(function (x, y) { return (x.askedMin || 0) - (y.askedMin || 0); });
+    return a;
+  }
+  function credits() {
+    var t = 0;
+    Object.keys(purchases()).forEach(function (k) { if (CATALOGUE[k]) t += CATALOGUE[k].cost; });
+    reqList().forEach(function (r) { if (r.status !== "refused") t += 1; });
+    return Math.max(0, START_CREDITS - t);
+  }
+  function bought() { return Object.keys(purchases()); }
+  function askedCheap() { var b = bought(); return b.indexOf("askForm") > -1 || b.indexOf("askPattern") > -1; }
+  function askedDirector() { var b = bought(); return b.indexOf("dirA") > -1 || b.indexOf("dirB") > -1; }
+
+  // ---------- actions ----------
+  function buy(key) {
+    var item = CATALOGUE[key];
+    if (!item || credits() < item.cost || purchases()[key]) return;
+    var p = { purchases: {} };
+    p.purchases[key] = { min: elapsedMin(), at: Date.now() };
+    push(p);
+  }
+  function askQuestion(text) {
+    if (!text.trim() || credits() < 1) return;
+    var id = "q" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    var p = { requests: {} };
+    p.requests[id] = { text: text.trim(), status: "pending", answer: "", askedMin: elapsedMin() };
+    push(p);
+  }
+  function answerRequest(id, text, refused) {
+    var p = { requests: {} };
+    p.requests[id] = { status: refused ? "refused" : "answered", answer: text, answeredMin: elapsedMin() };
+    push(p);
+  }
+  function submitAnswer(text, revised) {
+    if (!text.trim()) return;
+    push(revised ? { theory2: text.trim(), theory2Min: elapsedMin() } : { theory: text.trim(), theoryMin: elapsedMin() });
+  }
+
+  // ---------- render helpers ----------
+  function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
+  function paintStatus(node) {
+    node.className = "status" + (online ? " live" : lastErr ? " off" : "");
+    node.textContent = online ? "live · room " + room.toUpperCase() : lastErr ? "no connection" : "connecting…";
+  }
+  function paintPhase(host) {
+    host.textContent = "";
+    var p = phase();
+    var urgent = p.to && (p.to * 60 - elapsedMs() / 1000) <= 120;
+    var w = el("div", "phase" + (urgent ? " closing" : ""));
+    w.appendChild(el("span", "pn", p.n));
+    if (p.r) w.appendChild(el("span", "pr" + (urgent ? " urgent" : ""), p.r + " left"));
+    w.appendChild(el("span", "pd", p.d));
+    host.appendChild(w);
+  }
+
+  function renderPanel() {
+    paintStatus($("p-status"));
+    var c = credits();
+    var ck = $("p-clock"); ck.textContent = clockText(); ck.classList.toggle("stopped", !state.startedAt);
+    var cv = $("p-credits"); cv.textContent = c; cv.classList.toggle("low", c <= 2);
+    var pips = $("p-pips"); pips.textContent = "";
+    for (var i = 0; i < START_CREDITS; i++) pips.appendChild(el("span", "pip" + (i < START_CREDITS - c ? " spent" : "")));
+    paintPhase($("p-phase"));
+    $("p-brief").innerHTML = state.startedAt
+      ? "<strong>You are the review panel.</strong> The Director has 30 days to answer this grievance in writing and he will ask you what to say. Your printed pack is on the table. Eight credits buy anything the case desk holds, and three of them buy a question to him."
+      : "<strong>Read your printed pack now.</strong> The clock starts when the Director has set the scene.";
+
+    var m = elapsedMin(), i3 = injectFired(INJECTS[1]);
+    var show = !!state.startedAt && m >= T_LOCK - 1;
+    $("p-theory-sec").hidden = !show;
+    if (show) {
+      var pr = $("p-theory-prompt"), bx = $("p-theory"), bt = $("p-theory-send"), nt = $("p-theory-note"), lb = $("p-theory-lbl");
+      var canRevise = state.theory && i3 && !state.theory2 && m < T_INVEST;
+      if (!state.theory) {
+        lb.textContent = "Your answer — locks at minute " + T_LOCK;
+        pr.textContent = "What is the real problem, and what is your first move? One line. You may not name a person.";
+        nt.textContent = "Once submitted it cannot be edited.";
+        bt.textContent = "Submit and lock"; bx.hidden = false; bt.hidden = false;
+      } else if (canRevise) {
+        lb.textContent = "Revision — closes at minute " + T_REVISE;
+        pr.textContent = "Something has changed. You may submit one revision. Your first answer stays on the record.";
+        nt.textContent = "Minute " + state.theoryMin + ": " + state.theory;
+        bt.textContent = "Submit revision"; bx.hidden = false; bt.hidden = false;
+      } else {
+        lb.textContent = "Locked — this is what you tell the Director";
+        pr.textContent = state.theory2 || state.theory;
+        nt.textContent = state.theory2 ? "Revised at minute " + state.theory2Min + ". First answer, minute " + state.theoryMin + ": " + state.theory : "Locked at minute " + state.theoryMin + ".";
+        bx.hidden = true; bt.hidden = true;
+      }
+    }
+
+    var feed = $("p-feed"); feed.textContent = "";
+    var items = [];
+    INJECTS.forEach(function (inj) { if (injectFired(inj)) items.push({ min: injectMin(inj), cls: "inject", tag: "Incoming", title: inj.title, body: inj.body }); });
+    Object.keys(purchases()).forEach(function (k) {
+      var item = CATALOGUE[k]; if (!item) return;
+      var p = purchases()[k];
+      if (item.kind === "doc") items.push({ min: p.min, cls: "release", tag: "Released", title: item.name, collect: item.card + " — collect the printed copy from the case desk." });
+      else if (item.kind === "director") items.push({ min: p.min, cls: "answer", tag: "Director", title: item.name, collect: "Ask him now, out loud.", ask: true });
+      else items.push({ min: p.min, cls: "answer", tag: item.kind === "interview" ? "Statement" : "Case desk", title: item.name.replace(/^Interview /, ""), body: item.answer });
+    });
+    reqList().forEach(function (r) {
+      if (r.status === "pending") items.push({ min: r.askedMin, cls: "answer", tag: "With the desk", title: r.text, body: "Waiting for an answer." });
+      else items.push({ min: r.answeredMin != null ? r.answeredMin : r.askedMin, cls: "answer", tag: r.status === "refused" ? "Returned" : "Case desk", title: r.text, body: r.answer });
+    });
+    items.sort(function (a, b) { return b.min - a.min; });
+    if (!items.length) feed.appendChild(el("div", "notice", state.startedAt ? "Nothing has come in yet. Everything you buy, and everything that happens while you work, lands here." : "The feed opens when the case desk starts the clock."));
+    items.forEach(function (it) {
+      var w = el("div", "feed-item " + it.cls), h = el("div", "feed-head");
+      h.appendChild(el("span", "stamp " + (it.cls === "inject" ? "red" : it.cls === "release" ? "green" : "amber"), it.tag));
+      h.appendChild(el("span", "stamp muted", "min " + it.min));
+      h.appendChild(el("span", "t", it.title));
+      w.appendChild(h);
+      if (it.body) w.appendChild(el("div", "feed-body", it.body));
+      if (it.collect) w.appendChild(el("div", "collect" + (it.ask ? " ask" : ""), it.collect));
+      feed.appendChild(w);
+    });
+
+    function fill(hostId, kind) {
+      var host = $(hostId); host.textContent = "";
+      Object.keys(CATALOGUE).forEach(function (k) {
+        var item = CATALOGUE[k]; if (item.kind !== kind) return;
+        var owned = !!purchases()[k];
+        var b = el("button", "buy" + (owned ? " bought" : ""));
+        b.disabled = owned || credits() < item.cost || !investigating();
+        var nm = el("div", "nm"); nm.appendChild(document.createTextNode(item.name));
+        if (item.hint) nm.appendChild(el("small", null, item.hint));
+        b.appendChild(nm);
+        b.appendChild(el("span", "cost", owned ? "held" : item.cost + " cr"));
+        b.addEventListener("click", function () { buy(k); });
+        host.appendChild(b);
+      });
+    }
+    fill("p-dirs", "director"); fill("p-docs", "doc"); fill("p-ints", "interview"); fill("p-asks", "ask");
+    $("p-q-send").disabled = !investigating() || credits() < 1;
+  }
+
+  function renderDesk() {
+    paintStatus($("d-status"));
+    var ck = $("d-clock"); ck.textContent = clockText(); ck.classList.toggle("stopped", !state.startedAt);
+    var sb = $("d-start");
+    sb.hidden = !!state.startedAt; sb.disabled = !online;
+    sb.textContent = online ? "Open session" : "Connecting…";
+    $("d-reveal").hidden = !state.startedAt;
+    $("d-reveal").textContent = state.blackout ? "Screens up" : "Screens down";
+
+    var eh = $("d-err"); eh.textContent = "";
+    if (lastErr) eh.appendChild(el("div", "err", "Connection problem: " + lastErr + ". The page keeps retrying."));
+
+    var ah = $("d-alert"); ah.textContent = "";
+    ["dirA", "dirB"].forEach(function (k) {
+      if (purchases()[k]) {
+        var a = el("div", "alert");
+        a.appendChild(el("div", "at", "Director question bought · min " + purchases()[k].min));
+        a.appendChild(el("div", "ab", "They are about to ask him. Catch his eye."));
+        ah.appendChild(a);
+      }
+    });
+    paintPhase($("d-phase"));
+
+    var sh = $("d-stat"); sh.textContent = "";
+    function stat(k, v, n, flag) {
+      var s = el("div", "s" + (flag ? " flag" : ""));
+      s.appendChild(el("div", "sk", k)); s.appendChild(el("div", "sv", v));
+      if (n) s.appendChild(el("div", "sn", n));
+      sh.appendChild(s);
+    }
+    var m = elapsedMin();
+    stat("Credits left", String(credits()), bought().length + " items held");
+    stat("Cheap questions", askedCheap() ? "bought" : "not bought", askedCheap() ? "they found the thread" : "the 1-credit answers are still sitting there", !askedCheap() && m >= 6);
+    stat("Director", askedDirector() ? "asked" : "not asked", askedDirector() ? "they used him" : "nobody has spent a credit on him", !askedDirector() && m >= 8);
+    stat("Answer", state.theory2 ? "revised" : state.theory ? "locked" : "none", state.theory ? "min " + state.theoryMin : "due at minute " + T_LOCK, !state.theory && m >= T_LOCK);
+
+    var qh = $("d-queue"); qh.textContent = "";
+    var all = reqList();
+    var pend = all.filter(function (r) { return r.status === "pending"; });
+    var done = all.filter(function (r) { return r.status !== "pending"; });
+    if (!pend.length) qh.appendChild(el("div", "notice", "No questions waiting."));
+    pend.concat(done.slice(-3)).forEach(function (r) {
+      var w = el("div", "q" + (r.status === "pending" ? "" : " done"));
+      var head = el("div"); head.appendChild(el("span", "stamp muted", "min " + r.askedMin)); w.appendChild(head);
+      w.appendChild(el("div", "qt", r.text));
+      if (r.status === "pending") {
+        var chips = el("div", "chips");
+        [["Not a document", "That isn't a document. Tell me which one you want, and why.", true],
+         ["Desk doesn't hold it", "The desk does not hold that.", false],
+         ["Yes", "Yes.", false], ["No", "No.", false]].forEach(function (c) {
+          var ch = el("button", "chip", c[0]);
+          ch.addEventListener("click", function () { answerRequest(r._id, c[1], c[2]); });
+          chips.appendChild(ch);
+        });
+        w.appendChild(chips);
+        var ta = document.createElement("textarea"); ta.rows = 2; ta.placeholder = "Answer in character as the case desk…";
+        w.appendChild(ta);
+        var row = el("div", "row"), send = el("button", "btn", "Send answer");
+        send.addEventListener("click", function () { if (ta.value.trim()) answerRequest(r._id, ta.value.trim(), false); });
+        row.appendChild(send); w.appendChild(row);
+      } else {
+        w.appendChild(el("div", "card-b", (r.status === "refused" ? "Returned — no charge. " : "") + r.answer));
+      }
+      qh.appendChild(w);
+    });
+
+    var ih = $("d-injects"); ih.textContent = "";
+    INJECTS.forEach(function (inj) {
+      var w = el("div", "inj" + (inj.manual ? " manual" : "")), info = el("div", "ii");
+      info.appendChild(el("div", "t", (inj.manual ? "spare" : "min " + inj.min) + " · " + inj.title));
+      info.appendChild(el("div", "n", inj.note));
+      w.appendChild(info);
+      if (injectFired(inj)) w.appendChild(el("span", "stamp green", "sent · min " + injectMin(inj)));
+      else {
+        var b = el("button", "btn ghost", "Push now");
+        b.disabled = !state.startedAt;
+        b.addEventListener("click", function () { var f = { forced: {} }; f.forced[inj.id] = elapsedMin(); push(f); });
+        w.appendChild(b);
+      }
+      ih.appendChild(w);
+    });
+
+    var tb = $("d-audit"); tb.textContent = "";
+    var rows = [];
+    Object.keys(purchases()).forEach(function (k) {
+      var item = CATALOGUE[k]; if (!item) return;
+      var label = item.kind === "doc" ? "Document" : item.kind === "interview" ? "Interview" : item.kind === "director" ? "Asked the Director" : "Desk question";
+      rows.push([purchases()[k].min, label, item.name, item.cost + " cr"]);
+    });
+    if (state.theory) rows.push([state.theoryMin, "Answer locked", state.theory, "—"]);
+    if (state.theory2) rows.push([state.theory2Min, "Answer revised", state.theory2, "—"]);
+    reqList().forEach(function (r) { rows.push([r.askedMin, r.status === "refused" ? "Question returned" : "Free question", r.text, r.status === "refused" ? "0 cr" : "1 cr"]); });
+    rows.sort(function (a, b) { return a[0] - b[0]; });
+    if (!rows.length) { var tr0 = el("tr"), td0 = el("td", null, "Nothing yet."); td0.colSpan = 4; tr0.appendChild(td0); tb.appendChild(tr0); }
+    rows.forEach(function (r) {
+      var tr = el("tr");
+      tr.appendChild(el("td", "mono", String(r[0])));
+      tr.appendChild(el("td", null, r[1]));
+      tr.appendChild(el("td", null, r[2]));
+      tr.appendChild(el("td", "mono", r[3]));
+      tb.appendChild(tr);
+    });
+  }
+
+  function renderRooms() {
+    var h = $("g-rooms"); h.textContent = "";
+    ROOMS.forEach(function (r) {
+      var b = el("button", "room-btn" + (r === room ? " on" : ""), r.toUpperCase());
+      b.addEventListener("click", function () { room = r; ls("cd-room", r); renderRooms(); pull(); });
+      h.appendChild(b);
+    });
+  }
+
+  function render() {
+    $("gate").hidden = !!role;
+    $("panel").hidden = role !== "panel";
+    $("desk").hidden = role !== "desk";
+    $("blackout").hidden = !(state.blackout && role === "panel");
+    if (!role) { renderRooms(); return; }
+    if (role === "desk") renderDesk(); else renderPanel();
+  }
+
+  function setRole(r) { role = r; ls("cd-role", r); render(); }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-role]"), function (b) {
+    b.addEventListener("click", function () { setRole(b.getAttribute("data-role")); });
+  });
+  $("p-leave").addEventListener("click", function () { setRole(null); });
+  $("d-leave").addEventListener("click", function () { setRole(null); });
+  $("p-q-send").addEventListener("click", function () { var t = $("p-q"); askQuestion(t.value); t.value = ""; });
+  $("p-theory-send").addEventListener("click", function () { var t = $("p-theory"); submitAnswer(t.value, !!state.theory); t.value = ""; });
+  $("d-start").addEventListener("click", function () { push({ __reset: true, startedAt: Date.now() }); });
+  $("d-reveal").addEventListener("click", function () { push({ blackout: !state.blackout }); });
+  $("d-reset").addEventListener("click", function () { push({ __reset: true }); });
+
+  render();
+  pull();
+  setInterval(function () { if (document.visibilityState === "visible") pull(); }, 2000);
+  setInterval(function () { if (role) render(); }, 1000);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") pull(); });
+})();
+</script>
+</body>
+</html>
