@@ -85,13 +85,13 @@ window.CASE_DOCS = {
   },
 
   op4: {
-    title: "Team pulse report",
+    title: "Sada survey",
     sub: "Hawrah North · Q1 vs Q3 2026",
     html: `
 <div class="paper">
   <div class="p-bar" style="--bar:#0f3b57"><span>People &amp; Culture</span><b>Confidential</b></div>
   <div class="p-in">
-    <h3 class="p-h1">Team Pulse Report</h3>
+    <h3 class="p-h1">Sada Survey</h3>
     <div class="p-sub">Hawrah North Project Team — Engineering · Q1 2026 compared with Q3 2026 · 19 of 21 responded</div>
     <table class="p-tbl">
       <thead><tr><th>Measure</th><th style="text-align:right">Q1</th><th style="text-align:right">Q3</th><th style="text-align:right">Change</th></tr></thead>
