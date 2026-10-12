@@ -78,7 +78,7 @@ window.CASE_DOCS = {
         <span><b>May 2026</b><em>Date</em></span>
         <span class="cert-sig"><i>S. Al Mahrouqi</i><b>Saif Al Mahrouqi, UED</b><em>Engineering &amp; Proj. Excellence Director</em></span>
       </div>
-      <p class="cert-fine">Shukran recognition is non-monetary and is not an input to the performance rating. Ref HR-REC-04.</p>
+      <p class="cert-fine">Shukran awards carry a capped value and are not recorded in the performance record. Ref HR-REC-04.</p>
     </div>
   </div>
 </div>`
@@ -257,6 +257,33 @@ window.CASE_DOCS = {
     </div>
   </div>
   <div class="p-foot"><span>Chair: Nasser Al Balushi, Team Lead</span><span>Extract PD-2026-0914</span></div>
+</div>`
+  },
+
+  docF: {
+    title: "Recognition Framework",
+    sub: "HR-REC-01 · Rev 6 · corporate policy",
+    html: `
+<div class="paper">
+  <div class="p-bar" style="--bar:#3f3a63"><span>Petroleum Development Oman — Human Resources</span><b>HR-REC-01</b></div>
+  <div class="p-in">
+    <h3 class="p-h1">Recognition Framework</h3>
+    <div class="p-sub">HR-REC-01 · Rev 6 · effective January 2026 · applies to all staff</div>
+    <table class="p-tbl">
+      <thead><tr><th>Tier</th><th>Nominated by</th><th>Award</th><th>Performance record</th></tr></thead>
+      <tbody>
+        <tr><td>Shukran</td><td>Any staff member</td><td>Capped value, no limit on frequency</td><td>Not updated</td></tr>
+        <tr><td>Value Delivery Award</td><td>Line Manager</td><td>Monetary</td><td>Updated</td></tr>
+        <tr class="p-hi"><td><b>MD's Award</b></td><td>Directorate</td><td>Monetary</td><td>Updated</td></tr>
+      </tbody>
+    </table>
+    <p class="p-note"><b>3.2</b> Nominations may be made for an individual or for a project team. Team nominations are recorded against the project. Individual performance records are updated only for individual nominations.</p>
+    <p class="p-note"><b>3.5</b> Directorate nominations for Value Delivery and above are capped at 3% of directorate staff per cycle.</p>
+    <p class="p-note"><b>3.9</b> Shortlisted nominees for the MD's Award present their case at the annual forum.</p>
+    <p class="p-note"><b>4.1</b> Value Delivery Award recipients are automatically considered for the high-potential pool.</p>
+    <div class="p-quote" style="--bar:#3f3a63"><p style="font-style:normal">2026 half-year, PDO-wide: <b>1,180</b> Shukran awards issued · <b>14</b> Value Delivery Awards · <b>2</b> MD's Awards.</p></div>
+  </div>
+  <div class="p-foot"><span>Issued by Human Resources</span><span>Shukran procedure: HR-REC-04</span></div>
 </div>`
   }
 };

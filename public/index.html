@@ -399,6 +399,7 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
     docC: { kind: "doc", cost: 2, name: "Steering committee slide", hint: "Submission of 14 May", card: "Card C" },
     docD: { kind: "doc", cost: 2, name: "WhatsApp exchange", hint: "Project group, May", card: "Card D" },
     docE: { kind: "doc", cost: 2, name: "Year-end calibration record", hint: "Engineering, 2026 cycle", card: "Card E" },
+    docF: { kind: "doc", cost: 2, name: "Recognition Framework", hint: "HR-REC-01 · corporate policy", card: "Card F" },
     intK: { kind: "interview", cost: 4, name: "Interview Khalid Al Rashdi", hint: "Senior Process Engineer",
       answer: "I presented it because the committee submission was my item in the plan. Maryam did the modelling and I said so in the room. The figure went into my objective because that is the only place it goes. I do not know what else I was meant to do." },
     intN: { kind: "interview", cost: 4, name: "Interview Nasser Al Balushi", hint: "Team Lead",
@@ -747,7 +748,7 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
     });
 
     var rh = $("d-release"); rh.textContent = "";
-    ["docA", "docB", "docC", "docD", "docE"].forEach(function (k) {
+    ["docA", "docB", "docC", "docD", "docE", "docF"].forEach(function (k) {
       var item = CATALOGUE[k], held = purchases()[k];
       var w = el("div", "inj"), info = el("div", "ii");
       info.appendChild(el("div", "t", item.card + " · " + item.name));
