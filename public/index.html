@@ -170,6 +170,100 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
 #blackout .bt { font-family: var(--mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); }
 #blackout .bs { font-family: var(--slab); font-weight: 700; font-size: 30px; margin-top: 14px; max-width: 460px; }
 
+/* ---------- evidence papers ---------- */
+.dossier details { background: var(--ink-2); border: 1px solid var(--line-soft); border-radius: 3px; margin-bottom: 8px; overflow: hidden; }
+.dossier details[open] { border-color: var(--line); }
+.dossier summary { list-style: none; cursor: pointer; padding: 12px 14px; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.dossier summary::-webkit-details-marker { display: none; }
+.dossier summary:hover { background: var(--ink-3); }
+.dossier summary .dt { font-family: var(--slab); font-weight: 600; font-size: 15.5px; flex: 1; min-width: 0; }
+.dossier summary .ds { font-size: 12px; color: var(--muted); flex-basis: 100%; }
+.dossier .dwrap { padding: 0 10px 12px; }
+
+.paper { background: #fbfaf7; color: #1b1b1a; border-radius: 2px; overflow: hidden; font-family: var(--sans); font-size: 13.5px; line-height: 1.5; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.paper.serif .p-in { font-family: Georgia, "Times New Roman", serif; }
+.p-bar { background: var(--bar, #333); color: #fff; display: flex; justify-content: space-between; gap: 10px; padding: 9px 14px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.4px; text-transform: uppercase; }
+.p-in { padding: 16px 18px; }
+.p-h1 { font-family: var(--slab); font-weight: 700; font-size: 19px; margin: 0 0 3px; color: #1b1b1a; }
+.p-sub { font-size: 12.5px; color: #5a5a55; }
+.p-k { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.4px; text-transform: uppercase; color: #6a6a63; margin-bottom: 4px; }
+.p-grid { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 14px; }
+.p-grid > div { min-width: 140px; }
+.p-grid b { display: block; font-size: 14.5px; }
+.p-grid em { font-style: normal; font-size: 12.5px; color: #5a5a55; }
+.p-quote { background: #f1ede4; border-left: 4px solid var(--bar, #333); padding: 11px 13px; margin-top: 14px; }
+.p-quote p { margin: 0; font-style: italic; font-size: 14.5px; }
+.p-note { margin: 12px 0 0; }
+.p-fine { margin: 9px 0 0; font-size: 11px; color: #6a6a63; }
+.p-tbl { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+.p-tbl th { text-align: left; padding: 6px 8px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: #6a6a63; border-bottom: 1.5px solid #1b1b1a; }
+.p-tbl td { padding: 7px 8px; border-bottom: 1px solid #e3e0d9; }
+.p-tbl tr.p-hi td { background: #eef2f5; }
+.p-box { border: 1px solid #c9d8e2; background: #f4f8fb; border-radius: 2px; padding: 11px 13px; margin-top: 12px; }
+.p-boxh { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.p-pill { background: #1d6b3f; color: #fff; font-family: var(--mono); font-size: 9.5px; letter-spacing: .8px; padding: 2px 7px; border-radius: 2px; }
+.p-box p { margin: 6px 0 0; }
+.p-div { border-top: 1px dashed #c9c7c1; padding-top: 6px; }
+.p-foot { display: flex; justify-content: space-between; gap: 10px; padding: 10px 18px; border-top: 1px solid #e3e0d9; font-size: 11.5px; color: #5a5a55; background: #f5f3ee; }
+.p-closehead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; border-bottom: 2px solid #1b1b1a; padding-bottom: 10px; }
+.p-stamp { border: 2px solid #1d6b3f; color: #1d6b3f; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 2px; padding: 4px 10px; transform: rotate(-4deg); white-space: nowrap; }
+.p-check { list-style: none; margin: 14px 0 0; padding: 0; }
+.p-check li { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+.p-check i { width: 18px; height: 18px; border: 1.5px solid #1b1b1a; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 12px; flex: 0 0 auto; }
+.p-check span { flex: 1; }
+.p-check em { font-style: normal; font-size: 12px; color: #5a5a55; }
+.p-blank { border: 1px solid #c9c7c1; background: #fff; padding: 12px 14px; margin-top: 12px; }
+.p-blank span { display: block; border-bottom: 1px solid #c9c7c1; height: 22px; margin-top: 12px; }
+.p-mail + .p-mail { margin-top: 14px; border-top: 1px solid #e3e0d9; padding-top: 14px; }
+.p-mailh { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.p-mailh b { font-size: 15px; }
+.p-mailh span { font-size: 11.5px; color: #5a5a55; }
+.p-mail p { margin: 8px 0 0; }
+.p-slidebar { height: 8px; background: #0f3b57; }
+.p-slide { font-family: var(--slab); font-weight: 700; font-size: 21px; line-height: 1.25; color: #0f3b57; margin: 0; }
+.p-rule { width: 64px; height: 4px; background: #c0632f; margin: 12px 0 14px; }
+.p-dash { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14.5px; }
+.p-dash li { padding-left: 18px; position: relative; }
+.p-dash li::before { content: "—"; position: absolute; left: 0; color: #c0632f; font-weight: 700; }
+.p-person { border: 1px solid #d5d2cb; border-left: 5px solid var(--bar, #888); padding: 11px 13px; margin-top: 12px; }
+.p-personh { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.p-personh b { display: block; font-size: 15px; }
+.p-personh em { font-style: normal; font-size: 12.5px; color: #5a5a55; }
+.p-personh .r { text-align: right; }
+.p-person p { margin: 8px 0 0; }
+
+.chat { max-width: 330px; margin: 12px auto 0; border: 1px solid #c9c7c1; border-radius: 12px; overflow: hidden; background: #ece5dd; }
+.chat-h { background: #0f5c50; color: #fff; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+.chat-h .av { width: 30px; height: 30px; border-radius: 50%; background: #d7cfc4; color: #0f3b57; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex: 0 0 auto; }
+.chat-h b { display: block; font-size: 14px; }
+.chat-h em { font-style: normal; font-size: 10.5px; opacity: .85; }
+.chat-b { padding: 10px 9px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #111; }
+.chat-b .day { align-self: center; background: #d6d0c6; color: #3a3a37; font-size: 10.5px; padding: 2px 9px; border-radius: 7px; }
+.msg { max-width: 82%; padding: 6px 9px 4px; }
+.msg i { display: block; text-align: right; font-style: normal; font-size: 9.5px; color: #6b7a6b; margin-top: 2px; }
+.msg.out { align-self: flex-end; background: #d9fdd3; border-radius: 8px 2px 8px 8px; }
+.msg.in { align-self: flex-start; background: #fff; border-radius: 2px 8px 8px 8px; }
+
+.paper.shukran { background: #fff; padding: 12px; }
+.cert { border: 2px solid #26241f; padding: 5px; }
+.cert-in { border: 5px solid #6fbf3b; background: radial-gradient(ellipse at 44% 40%, #fff 0%, #fffbe2 18%, #ffeb9c 44%, #ffdc55 70%, #f6c829 100%); padding: 14px 16px 10px; color: #26241f; }
+.cert-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.shk { display: inline-flex; align-items: center; gap: 6px; background: #8cc63f; border: 2px solid #26241f; padding: 3px 7px; }
+.shk b { font-family: Verdana, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: .4px; }
+.shk i { font-style: normal; background: #ffde17; border: 1.5px solid #26241f; width: 21px; height: 21px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.cert-cat { font-family: Georgia, serif; font-style: italic; font-size: 24px; text-align: right; }
+.cert-stars { text-align: right; color: #f05a28; font-size: 19px; letter-spacing: 3px; margin-top: 3px; }
+.cert-body { text-align: center; font-family: Georgia, serif; padding: 10px 6px; }
+.cert-lead { font-style: italic; font-size: 13.5px; margin: 0; }
+.cert-name { font-weight: 700; font-size: 19px; margin: 7px 0; }
+.cert-cit { font-weight: 700; font-size: 14.5px; margin: 6px auto 0; max-width: 30em; }
+.cert-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-family: Georgia, serif; margin-top: 10px; }
+.cert-foot em { font-style: normal; display: block; font-size: 10.5px; color: #5a4a12; }
+.cert-sig { text-align: right; }
+.cert-sig i { font-style: italic; font-size: 20px; color: #1a3f8f; display: block; }
+.cert-sig b { font-size: 11.5px; display: block; }
+.cert-fine { text-align: center; font-size: 8.5px; color: #6d5c1e; margin: 8px 0 0; }
+
 @media (max-width: 560px) {
   .rail-in { gap: 9px; padding: 8px 14px; }
   .clock { font-size: 18px; } .credits .v { font-size: 18px; } .pips { display: none; }
@@ -222,6 +316,10 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
       <div class="notice" id="p-brief" style="margin-top:10px"></div>
       <button class="linkish" id="p-leave">Change role or room</button>
     </div>
+    <div class="sec" id="p-docs-sec" hidden>
+      <span class="lbl" id="p-docs-lbl">In your hands</span>
+      <div class="dossier" id="p-dossier"></div>
+    </div>
     <div class="sec" id="p-theory-sec" hidden>
       <span class="lbl" id="p-theory-lbl">Your answer</span>
       <div class="card">
@@ -266,6 +364,7 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
     <div class="sec"><span class="lbl">The panel</span><div class="stat" id="d-stat"></div></div>
     <div class="sec"><span class="lbl">Incoming questions</span><div id="d-queue"></div></div>
     <div class="sec"><span class="lbl">Story events</span><div id="d-injects"></div></div>
+    <div class="sec"><span class="lbl">Release a document — free, lands on the panel's screen</span><div id="d-release"></div></div>
     <div class="sec">
       <span class="lbl">Audit trail — hand this to the Director before he closes</span>
       <div class="scroll-x"><table class="audit"><thead><tr><th>Min</th><th>Action</th><th>Detail</th><th>Cost</th></tr></thead><tbody id="d-audit"></tbody></table></div>
@@ -281,10 +380,13 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
   </div>
 </div>
 
+<script src="docs.js"></script>
 <script>
 (function () {
   "use strict";
 
+  var DOCS = window.CASE_DOCS || {};
+  var OPENING = window.CASE_OPENING || [];
   var START_CREDITS = 8, T_LOCK = 7, T_REVISE = 11, T_INVEST = 12, T_TOTAL = 20;
   var ROOMS = ["a", "b", "c"];
   var API = "/api/state", FALLBACK = "/.netlify/functions/state", apiBase = API;
@@ -399,7 +501,9 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
   }
   function credits() {
     var t = 0;
-    Object.keys(purchases()).forEach(function (k) { if (CATALOGUE[k]) t += CATALOGUE[k].cost; });
+    Object.keys(purchases()).forEach(function (k) {
+      if (CATALOGUE[k] && !purchases()[k].granted) t += CATALOGUE[k].cost;
+    });
     reqList().forEach(function (r) { if (r.status !== "refused") t += 1; });
     return Math.max(0, START_CREDITS - t);
   }
@@ -447,6 +551,36 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
     host.appendChild(w);
   }
 
+  var dossierSig = "", openDocs = {};
+  function renderDossier() {
+    var ids = [];
+    if (state.startedAt) OPENING.forEach(function (id) { if (DOCS[id]) ids.push([id, "Opening pack"]); });
+    Object.keys(purchases()).sort().forEach(function (k) {
+      if (DOCS[k]) ids.push([k, "Released · min " + purchases()[k].min]);
+    });
+    $("p-docs-sec").hidden = !ids.length;
+    $("p-docs-lbl").textContent = "In your hands — " + ids.length + " document" + (ids.length === 1 ? "" : "s");
+    var sig = ids.map(function (x) { return x[0] + x[1]; }).join("|");
+    if (sig === dossierSig) return;
+    dossierSig = sig;
+    var host = $("p-dossier"); host.textContent = "";
+    ids.forEach(function (pair) {
+      var id = pair[0], d = DOCS[id], released = pair[1].indexOf("Released") === 0;
+      var det = document.createElement("details");
+      det.open = !!openDocs[id];
+      det.addEventListener("toggle", function () { openDocs[id] = det.open; });
+      var sum = document.createElement("summary");
+      sum.appendChild(el("span", "dt", d.title));
+      sum.appendChild(el("span", "stamp " + (released ? "green" : "muted"), pair[1]));
+      sum.appendChild(el("span", "ds", d.sub));
+      det.appendChild(sum);
+      var wrap = el("div", "dwrap");
+      wrap.innerHTML = d.html;
+      det.appendChild(wrap);
+      host.appendChild(det);
+    });
+  }
+
   function renderPanel() {
     paintStatus($("p-status"));
     var c = credits();
@@ -455,6 +589,7 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
     var pips = $("p-pips"); pips.textContent = "";
     for (var i = 0; i < START_CREDITS; i++) pips.appendChild(el("span", "pip" + (i < START_CREDITS - c ? " spent" : "")));
     paintPhase($("p-phase"));
+    renderDossier();
     $("p-brief").innerHTML = state.startedAt
       ? "<strong>You are the review panel.</strong> The Director has 30 days to answer this grievance in writing and he will ask you what to say. Your printed pack is on the table. Eight credits buy anything the case desk holds, and three of them buy a question to him."
       : "<strong>Read your printed pack now.</strong> The clock starts when the Director has set the scene.";
@@ -489,7 +624,7 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
     Object.keys(purchases()).forEach(function (k) {
       var item = CATALOGUE[k]; if (!item) return;
       var p = purchases()[k];
-      if (item.kind === "doc") items.push({ min: p.min, cls: "release", tag: "Released", title: item.name, collect: item.card + " — collect the printed copy from the case desk." });
+      if (item.kind === "doc") items.push({ min: p.min, cls: "release", tag: "Released", title: item.name, collect: item.card + " — printed copy from the case desk · now open under “In your hands”" });
       else if (item.kind === "director") items.push({ min: p.min, cls: "answer", tag: "Director", title: item.name, collect: "Ask him now, out loud.", ask: true });
       else items.push({ min: p.min, cls: "answer", tag: item.kind === "interview" ? "Statement" : "Case desk", title: item.name.replace(/^Interview /, ""), body: item.answer });
     });
@@ -611,12 +746,33 @@ table.audit td { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); ve
       ih.appendChild(w);
     });
 
+    var rh = $("d-release"); rh.textContent = "";
+    ["docA", "docB", "docC", "docD", "docE"].forEach(function (k) {
+      var item = CATALOGUE[k], held = purchases()[k];
+      var w = el("div", "inj"), info = el("div", "ii");
+      info.appendChild(el("div", "t", item.card + " · " + item.name));
+      info.appendChild(el("div", "n", item.hint));
+      w.appendChild(info);
+      if (held) w.appendChild(el("span", "stamp green", (held.granted ? "pushed" : "bought") + " · min " + held.min));
+      else {
+        var b = el("button", "btn ghost", "Push now");
+        b.disabled = !state.startedAt;
+        b.addEventListener("click", function () {
+          var p = { purchases: {} };
+          p.purchases[k] = { min: elapsedMin(), at: Date.now(), granted: true };
+          push(p);
+        });
+        w.appendChild(b);
+      }
+      rh.appendChild(w);
+    });
+
     var tb = $("d-audit"); tb.textContent = "";
     var rows = [];
     Object.keys(purchases()).forEach(function (k) {
       var item = CATALOGUE[k]; if (!item) return;
       var label = item.kind === "doc" ? "Document" : item.kind === "interview" ? "Interview" : item.kind === "director" ? "Asked the Director" : "Desk question";
-      rows.push([purchases()[k].min, label, item.name, item.cost + " cr"]);
+      rows.push([purchases()[k].min, label, item.name, purchases()[k].granted ? "pushed" : item.cost + " cr"]);
     });
     if (state.theory) rows.push([state.theoryMin, "Answer locked", state.theory, "—"]);
     if (state.theory2) rows.push([state.theory2Min, "Answer revised", state.theory2, "—"]);
