@@ -1,0 +1,66 @@
+{
+ "opening": [
+  "op1",
+  "op2",
+  "op3",
+  "op4",
+  "op5"
+ ],
+ "docs": {
+  "op1": {
+   "t": "Grievance intake note",
+   "s": "ER-2026-0338 · Human Resources",
+   "text": "Human Resources — Employee Relations Strictly confidential Grievance intake note Reference ER-2026-0338 · raised 24 September 2026 Raised by Maryam Al Hinai Process Engineer, Hawrah North Category 2 — Fairness & recognition Not a disciplinary matter Named parties None Declined when asked In the employee's own words “I am not asking for anything to be taken away from anyone. I have been told I need to raise my profile. I would like to understand what that means here.” HR Business Partner note: Employee is a solid performer with no prior matters on file and was not seeking escalation. She declined to name anyone. I do not consider this a conduct matter. Referred to: Director, Engineering Respond within 30 days"
+  },
+  "op2": {
+   "t": "Performance Commitment — K. Al Rashdi",
+   "s": "2026 cycle · Individual Objectives",
+   "text": "Performance · My Forms / Form Details 2026 cycle 2026 Performance Commitment for Khalid Al Rashdi Senior Process Engineer · Hawrah North Individual objectives Objective | Comment | Ensure Personal Safety Compliance | — | Ensure Process safety compliance | — | Ensure Ethics Compliance | — | Cost Competitiveness | 1 | Enhance Employee Skill and Engagement | — | Cost Competitiveness — end year comment Delivered 240% Employee: Identified and delivered OMR 2.4m opex reduction on the Hawrah North debottlenecking study against a target of OMR 1.0m. Case presented to the Leadership Steering Committee on 14 May 2026 and approved without change. Supported by the discipline team throughout. Supervisor: Largest single opex saving in the asset this year. Banked in full under this objective. Each objective accepts one accountable owner. Contributors are recorded in the project close-out record, not in this form."
+  },
+  "op3": {
+   "t": "Shukran certificate",
+   "s": "Team Support · May 2026",
+   "text": "SHUKRAN ☺ Team Support ★ ★ In honor of your outstanding achievement and dedication, we are pleased to present this certificate to Al Hinai, Maryam UEPD41 In recognition of your excellence in In recognition of your support to the Hawrah North team through a demanding delivery period. May 2026 Date S. Al Mahrouqi Saif Al Mahrouqi, UED Engineering & Proj. Excellence Director Shukran awards carry a capped value and are not recorded in the performance record. Ref HR-REC-04."
+  },
+  "op4": {
+   "t": "Sada survey",
+   "s": "Hawrah North · Q1 vs Q3 2026",
+   "text": "People & Culture Confidential Sada Survey Hawrah North Project Team — Engineering · Q1 2026 compared with Q3 2026 · 19 of 21 responded Measure | Q1 | Q3 | Change | Overall delivery satisfaction | 88 | 91 | +3 | Clarity of goals | 81 | 79 | −2 | Workload is manageable | 74 | 70 | −4 | I would recommend this team to a colleague | 76 | 58 | −18 | Overall engagement index | 78 | 66 | −12 | Free-text comments (2 of 6 shown, unedited) “No complaints about the work. We deliver.” “I've stopped volunteering for the interesting things. Hard to explain why.” Generated 02 October 2026 · PC-TP-4471 Line manager and above"
+  },
+  "op5": {
+   "t": "Project close-out record",
+   "s": "Form ENG-CO-02 · signed 28 May 2026",
+   "text": "Project Close-Out Record Hawrah North Debottlenecking Study · Form ENG-CO-02 CLOSED ✓ 1. Technical deliverables issued and filed Complete ✓ 2. Cost and schedule performance recorded Complete ✓ 3. Lessons learned logged in the knowledge system Complete 4. Contribution record — list each deliverable and the individual(s) who produced it Approved by: Nasser Al Balushi , Team Lead 28 May 2026"
+  },
+  "docA": {
+   "t": "Minutes of meeting — study kick-off",
+   "s": "MoM-HN-001 · 3 February 2026",
+   "text": "Minutes of Meeting — Study Kick-off Hawrah North Debottlenecking Study · 03 February 2026, 09:00 · Meeting room B-214 Attendees Nasser Al Balushi (Team Lead, chair) · Khalid Al Rashdi (Senior Process Engineer) · Maryam Al Hinai (Process Engineer) · Fatma Al Habsi (Planning) Scope and ownership agreed Item | Deliverable | Responsible | Due | 1.1 | Hydraulic model build and case matrix (12 cases) | M. Al Hinai | 30 Apr | 1.2 | Technical assurance review of model output | K. Al Rashdi | 07 May | 1.3 | Commercial case and committee submission | K. Al Rashdi | 14 May | 1.4 | Resourcing: 0.6 FTE allocated, single engineer | M. Al Hinai | — | Note 4: Chair confirmed the study is a single-engineer scope. Modelling work sits wholly with item 1.1. Minuted by F. Al Habsi · circulated 03 Feb 2026 MoM-HN-001"
+  },
+  "docB": {
+   "t": "Email thread",
+   "s": "11–12 May 2026",
+   "text": "Mail — Hawrah North Debottlenecking Study 2 messages Hawrah North — final model runs complete Mon 11 May 2026, 23:14 Maryam Al Hinai — Process Engineer · To: Khalid Al Rashdi · Cc: Nasser Al Balushi Khalid, All twelve cases are closed. The OMR 2.4m figure comes out of Case 9 — it holds without any new rotating equipment, which was the part we were unsure about. Charts are formatted for the committee deck. Shout if you want the sensitivity run as a backup slide. RE: Hawrah North — final model runs complete Tue 12 May 2026, 07:02 Khalid Al Rashdi — Senior Process Engineer · To: Maryam Al Hinai Thanks Maryam — good work. I'll take it from here for the steering committee. Exported from the project mailbox during the review"
+  },
+  "docC": {
+   "t": "Steering committee slide",
+   "s": "Slide 6 of 18 · 14 May 2026",
+   "text": "Hawrah North Debottlenecking — OMR 2.4m annual saving identified Twelve operating cases modelled; Case 9 confirms the saving is deliverable without new rotating equipment. No additional capex required. Payback inside the current planning cycle. Recommendation: endorse for implementation in the 2027 work programme. Leadership Steering Committee · 14 May 2026 · Slide 6 of 18 Prepared by: Khalid Al Rashdi"
+  },
+  "docD": {
+   "t": "WhatsApp exchange",
+   "s": "Maryam Al Hinai's phone · 14 May 2026",
+   "text": "Screenshot supplied during the review — Maryam Al Hinai's phone FH Fatma Al Habsi online 14 May 2026 Did you see slide 6 from the steering committee today 20:41 I saw it. 20:43 I ran every one of those cases. Twelve model runs, most of them over the Eid break. 20:44 Then say something to Nasser. 20:46 And look like I'm chasing credit? No. 20:47 So you do nothing? 20:48 I do the next one slower. 20:52"
+  },
+  "docE": {
+   "t": "Year-end calibration extract",
+   "s": "PD-2026-0914 · 9 September 2026",
+   "text": "Performance & Development System Restricted Year-end calibration extract Hawrah North Project Team · calibration meeting held 09 September 2026 Khalid Al Rashdi Senior Process Engineer Exceeds expectations Nominated — high-potential pool Calibration comment: Strong visibility with leadership. Presented the Hawrah North savings case to the LT and handled the questioning well. Maryam Al Hinai Process Engineer Meets expectations Not nominated Calibration comment: Solid technical delivery, reliable under pressure. Development area: needs to raise her profile with senior stakeholders. Chair: Nasser Al Balushi, Team Lead Extract PD-2026-0914"
+  },
+  "docF": {
+   "t": "Recognition Framework",
+   "s": "HR-REC-01 · Rev 6 · corporate policy",
+   "text": "Petroleum Development Oman — Human Resources HR-REC-01 Recognition Framework HR-REC-01 · Rev 6 · effective January 2026 · applies to all staff Tier | Nominated by | Award | Performance record | Shukran | Any staff member | Capped value, no limit on frequency | Not updated | Value Delivery Award | Line Manager | Monetary | Updated | MD's Award | Directorate | Monetary | Updated | 3.2 Nominations may be made for an individual or for a project team. Team nominations are recorded against the project. Individual performance records are updated only for individual nominations. 3.5 Directorate nominations for Value Delivery and above are capped at 3% of directorate staff per cycle. 3.9 Shortlisted nominees for the MD's Award present their case at the annual forum. 4.1 Value Delivery Award recipients are automatically considered for the high-potential pool. 2026 half-year, PDO-wide: 1,180 Shukran awards issued · 14 Value Delivery Awards · 2 MD's Awards. Issued by Human Resources Shukran procedure: HR-REC-04"
+  }
+ }
+}

@@ -32,3 +32,12 @@ Everything is in public/index.html:
   the constants at the top — credits and the minute marks
 
 Redeploy with the same command after any edit.
+
+## Phone case desk (AI chat per person)
+
+- Each case has its own link: `/case/1` (Case 1). QR codes for all cases: `/qr.html`.
+- Every phone gets its own private chat; nothing is shared between phones and nothing is stored on the server.
+- The AI needs one setting in Netlify: **Project configuration → Environment variables → Add `ANTHROPIC_API_KEY`** (an Anthropic API key), then redeploy.
+  Without it the desk still works in "simple matching" mode (keyword based).
+- Optional: `DESK_MODEL` to change the model (default `claude-haiku-5-5`).
+- The case diagnosis lives only in `netlify/cases/` (server side); it is never sent to phones.

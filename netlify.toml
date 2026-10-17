@@ -4,3 +4,9 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# Phone case desk: one QR per case, e.g. /case/1
+[[redirects]]
+  from = "/case/*"
+  to = "/bot.html"
+  status = 200
